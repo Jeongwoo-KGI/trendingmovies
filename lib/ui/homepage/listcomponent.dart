@@ -7,6 +7,7 @@ class ListComponent extends StatelessWidget{
   */
   bool numberMeters = false;
   String title = "";
+  final List <String> entries = <String> ['A', 'B', 'C'];
 
   //component
   ListComponent({super.key, required this.title, this.numberMeters = false});
@@ -28,32 +29,32 @@ class ListComponent extends StatelessWidget{
             ),
           ),
         ),
-        ListView(
-          padding: const EdgeInsets.only(left: 10),
-          scrollDirection: Axis.horizontal,
-          children: [
-            Container(
-              width: 80,
-              height: 125,
-              color: Colors.amber,
-              child: Text('1'),
+        Container(
+          //horizonal list view requires a fixed height
+          //solution found from "https://stackoverflow.com/questions/71543759/when-adding-listview-builder-the-entire-screen-is-goes-blank"
+          height: 300,
+          child: Expanded(
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index){
+                return SizedBox(
+                  height: 120,
+                  width: 90,
+                  //change the text below with stack that contains image and the number marks
+                  //gotta ask the syntax for this (){}()
+                  child: () {
+                    if (numberMeters == true) {
+                      return Center(child:Text('Entry ${entries[index]}'));
+                    }
+                    return Center(child:Text('no number'));
+                  }(),
+                );
+              },
+              padding: const EdgeInsets.only(left: 15), 
+              separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.transparent,), 
+              itemCount: entries.length,
             ),
-
-            Container(
-              width: 80,
-              height: 125,
-              color: Colors.amber,
-              child: Text('2'),
-            ),
-
-            Container(
-              width: 80,
-              height: 125,
-              color: Colors.amber,
-              child: Text('3'),
-            ),
-
-          ]
+          ),
         ),
       ],
     );

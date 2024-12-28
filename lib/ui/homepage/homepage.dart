@@ -12,12 +12,19 @@ class Homepage extends StatelessWidget {
           
         ),
 
-        body: Column(
-          children: [
-            MostTrendingMovie(),
-            ListComponent(title: "first"),
-            ListComponent(title: "second"),
-          ],
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              //redirect the data to these widgets 
+              // no need to change the data after being built. 
+              // but do 'listen' and 'keep an eye' on the change of the data
+              // if the dataset changes, change the app items.
+              MostTrendingMovie(),
+              ListComponent(title: "first"),
+              ListComponent(title: "second"),
+            ],
+          ),
         ),
       ) ,
     );
