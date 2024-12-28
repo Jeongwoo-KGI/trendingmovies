@@ -7,7 +7,7 @@ class ListComponent extends StatelessWidget{
   */
   bool numberMeters = false;
   String title = "";
-
+  List<String> dummy = ['A','B','C'];
   //component
   ListComponent({super.key, required this.title, this.numberMeters = false});
 
@@ -28,32 +28,20 @@ class ListComponent extends StatelessWidget{
             ),
           ),
         ),
-        ListView(
-          padding: const EdgeInsets.only(left: 10),
-          scrollDirection: Axis.horizontal,
-          children: [
-            Container(
-              width: 80,
-              height: 125,
-              color: Colors.amber,
-              child: Text('1'),
-            ),
-
-            Container(
-              width: 80,
-              height: 125,
-              color: Colors.amber,
-              child: Text('2'),
-            ),
-
-            Container(
-              width: 80,
-              height: 125,
-              color: Colors.amber,
-              child: Text('3'),
-            ),
-
-          ]
+        Container(
+          height: 160,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              if (numberMeters == true){
+                return Text('A');
+              } 
+              return Container(
+                child: Text('B'),
+              );
+            }, 
+            separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.transparent), 
+            itemCount: dummy.length)
         ),
       ],
     );
