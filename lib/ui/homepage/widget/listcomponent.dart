@@ -31,6 +31,7 @@ class ListComponent extends StatelessWidget{
         Container(
           height: 160,
           child: ListView.separated(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 2, bottom: 3),
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               if (numberMeters == true){

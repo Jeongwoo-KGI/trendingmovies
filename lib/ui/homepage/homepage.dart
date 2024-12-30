@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:trendingmovies/ui/homepage/individualmovie.dart';
 import 'package:trendingmovies/ui/homepage/listcomponent.dart';
-import 'package:trendingmovies/ui/homepage/mosttrendingmovie.dart';
 
 class Homepage extends StatelessWidget {
 
@@ -14,7 +14,8 @@ class Homepage extends StatelessWidget {
 
         body: Column(
           children: [
-            MostTrendingMovie(),
+            //first, most trending
+            individualMovie(), //url, height, width
             ListComponent(title: "first"),
             ListComponent(title: "second"),
           ],
