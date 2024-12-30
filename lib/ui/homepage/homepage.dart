@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trendingmovies/ui/homepage/individualmovie.dart';
-import 'package:trendingmovies/ui/homepage/listcomponent.dart';
+import 'package:trendingmovies/ui/homepage/widget/individualmovie.dart';
+import 'package:trendingmovies/ui/homepage/widget/listcomponent.dart';
 
 class Homepage extends StatefulWidget {
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trendingmovies/ui/homepage/individualmovie.dart';
 import 'package:trendingmovies/ui/homepage/widget/individualmovie.dart';
 
 class ListComponent extends StatelessWidget{
