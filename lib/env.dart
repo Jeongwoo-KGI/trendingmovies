@@ -8,4 +8,7 @@ abstract class Env {
 
   @EnviedField(varName: 'API_KEY', defaultValue: '', obfuscate: true)
   static String apiKey = _Env.apiKey;
+
+  @EnviedField(varName: 'API_TOKEN',defaultValue: '', obfuscate: true)
+  static String apiToken = _Env.apiToken;
 }
