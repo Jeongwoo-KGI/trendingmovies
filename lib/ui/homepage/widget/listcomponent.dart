@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:trendingmovies/ui/homepage/individualmovie.dart';
+import 'package:trendingmovies/ui/homepage/widget/individualmovie.dart';
 
 class ListComponent extends StatelessWidget{
   /*
@@ -28,18 +30,41 @@ class ListComponent extends StatelessWidget{
             ),
           ),
         ),
-        Container(
+        SizedBox(
           height: 160,
           child: ListView.separated(
             padding: EdgeInsets.only(left: 15, right: 15, top: 2, bottom: 3),
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               if (numberMeters == true){
-                return Text('A');
-              } 
-              return Container(
-                child: Text('B'),
-              );
+                return Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    Positioned(
+                      child: individualMovie(imageURL),
+                    ),
+                    Positioned(
+                      left: 0,
+                      child: Text(
+                        "1",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 40,
+                          //color: 
+                        ),
+                      ), //change this to the text of 1~10 depending on the inserted element
+                    ),
+                  ],
+
+                );
+              } else {
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: IndividualMovie(imageURL, width, height),
+                );
+              }
             }, 
             separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.transparent), 
             itemCount: dummy.length)
