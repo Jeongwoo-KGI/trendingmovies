@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 //manifesting all the theme data for the application
 //font is white, background to be black. 
+//this application will only have dark mode
 final ThemeData appTheme = ThemeData(
   colorSchemeSeed: Colors.black,
   appBarTheme: AppBarTheme(

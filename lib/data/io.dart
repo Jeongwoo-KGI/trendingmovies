@@ -1,0 +1,1 @@
+class TMDBApi extends T
