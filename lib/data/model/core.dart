@@ -2,7 +2,7 @@
 
 class Core {
   bool adult;
-  String imageURL;
+  String? backdropPath;
   String originallanguage;
   String overview;
   String title;
@@ -11,7 +11,7 @@ class Core {
 
   Core({
     required this.adult,
-    required this.imageURL,
+    required this.backdropPath,
     required this.originallanguage,
     required this.overview,
     required this.title,
@@ -22,24 +22,24 @@ class Core {
   //from json method constructor
   Core.fromJson(Map<String, dynamic> map) : this(
     adult: map['adult'],
-    imageURL: map['imageURL'],
-    originallanguage: map['originallanguage'],
+    backdropPath: map['backdrop_path'],
+    originallanguage: map['original_language'],
     overview: map['overview'],
-    title: map['title'],
-    voteaverage: map['voteaverage'],
-    releasedate: map['releasedate'],
+    title: map['original_title'],
+    voteaverage: map['vote_average'],
+    releasedate: map['release_date'],
   );
 
   //toJson method (we don't need this tho...)
   Map<String, dynamic> toJson(){
     return{
       'adult': adult,
-      'imageURL':imageURL,
-      'originallanguage':originallanguage,
+      'backdrop_Path':backdropPath,
+      'original_language':originallanguage,
       'overview':overview,
-      'title':title,
-      'voteaverage':voteaverage,
-      'releasedate': releasedate,
+      'original_title':title,
+      'vote_average':voteaverage,
+      'release_date': releasedate,
     };
   }
 

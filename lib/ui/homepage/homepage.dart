@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:trendingmovies/ui/homepage/homepage_viewmodel.dart';
 import 'package:trendingmovies/ui/homepage/widget/individualmovie.dart';
 import 'package:trendingmovies/ui/homepage/widget/listcomponent.dart';
 
@@ -15,68 +17,68 @@ class _HomepageState extends State<Homepage> {
   bool isFetching = false;
 
   //function to get more elements
-  void fetchMore() async {
-    if(isFetching) {
-      return;
-    } 
-    isFetching = true;
-    await Future.delayed(Duration(milliseconds: 500));
-    final newList = List.generate(20, (index) => items.last + index);
-    items.addAll(newList);
-    setState(() {
+  //ToDo: after MVVM architecture implementation, comment this section
+  // void fetchMore() async {
+  //   if(isFetching) {
+  //     return;
+  //   } 
+  //   isFetching = true;
+  //   await Future.delayed(Duration(milliseconds: 500));
+  //   final newList = List.generate(20, (index) => items.last + index);
+  //   items.addAll(newList);
+  //   setState(() {
       
-    });
-    isFetching = false;
-  }
+  //   });
+  //   isFetching = false;
+  // }
 
   //function to refresh the page
-  Future<void> onRefresh() async {
-    if (isFetching) {
-      return;
-    }
-    isFetching = true;
-    await Future.delayed(Duration(milliseconds: 300));
-    //refresh
-    items = List.generate(20, (index) => index);
-    setState(() {
+  //ToDo: after MVVM architecture implementation, comment this section
+  // Future<void> onRefresh() async {
+  //   if (isFetching) {
+  //     return;
+  //   }
+  //   isFetching = true;
+  //   await Future.delayed(Duration(milliseconds: 300));
+  //   //refresh
+  //   items = List.generate(20, (index) => index);
+  //   setState(() {
       
-    });
-    isFetching = false;
+  //   });
+  //   isFetching = false;
 
-  }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       //making it to notice that it reached the end of the list
-      body: NotificationListener(
-        onNotification: (notification) {
-          if (notification is ScrollUpdateNotification) {
-            if(notification.metrics.pixels >= notification.metrics.maxScrollExtent) {
-              fetchMore();
-            }
-          }
-        },
-        child: SafeArea(
+      body: Consumer(
+        builder: (context, ref, child) {
+          final viewModel = ref.read(homepageViewModel.notifier);
+        return SafeArea(
           child: RefreshIndicator(
-            onRefresh: onRefresh, //여기에 왜 ()가 들어가면 에러가 나는걸까..?
+            //onRefresh : Future<void> 
+            onRefresh: () async {
+              viewModel.onRefresh();
+            }, 
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   //first, most trending
-                  individualMovie(), //url, height, width
-                  ListComponent(title: "현재 상영중"),
-                  ListComponent(title: "인기순", numberMeters: true),
-                  ListComponent(title: "평점높은 순"),
-                  ListComponent(title: "개봉예정"),
+                  IndividualMovie(), //url, height, width
+                  ListComponent("현재 상영중"),
+                  ListComponent("인기순", true),
+                  ListComponent("평점높은 순"),
+                  ListComponent("개봉예정"),
                 ],
               ),
             ),
           ),
-        ),
-      ) ,
+        );},
+      ),
     );
   }
 }

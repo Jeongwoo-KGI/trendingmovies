@@ -6,6 +6,9 @@ import 'package:trendingmovies/data/model/core.dart';
 void main() {
   //testing our data that we get from the TMDB database
   test('Core model', (){
+    //errors that I faced
+    //1. using singular '' has caused errors of nonexpected character
+    //2. having a ',' at the end of the last element has caused unexpected character
     String dummyData = """
     {
       "adult": false,
@@ -28,3 +31,5 @@ void main() {
     print(core.toJson());
   });
 }
+//final result: {adult: false, imageURL: testing.com, originallanguage: en, overview: hi there, title: StarWars II, voteaverage: 9.9, releasedate: YYYY-MM-DD}
+//thus, well done!
