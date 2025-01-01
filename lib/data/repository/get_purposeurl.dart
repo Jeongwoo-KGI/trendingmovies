@@ -8,8 +8,6 @@ String getPurposeURL(String purpose) {
       return "https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1";
     case "releaseSoon": //개봉예정
       return "https://api.themoviedb.org/3/movie/upcoming?language=ko-KR&page=1";
-    case "details": //영화 상세 정보
-      return "https://api.themoviedb.org/3/movie/영화아이디?language=ko-KR";
-  }
+   }
   return "error: unknown Category";
 }

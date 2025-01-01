@@ -1,12 +1,22 @@
 //this is the data fetched from the TMDB database 
+//issue is that there are cases where the data may not have certain values
+//one example of such is backdrop_path
+//Under such circumstances, we can add DTO(Dtat Transfer Object) 
+// API -(JSON)-> Map Object -> DTO -(mapper)-> Model Class objects
+// final class objects are to be passed in for business logic
 
+
+//this Core class is to take care of the Json that we recieve from the API
+//this will act as a dto 
+//truncated to perform faster
+//original version of Core can be hinted from core_details.dart
 class Core {
   bool adult;
   String? backdropPath;
   String originallanguage;
-  String overview;
+  String? overview;
   String title;
-  double voteaverage;
+  double? voteaverage;
   String releasedate;
 
   Core({

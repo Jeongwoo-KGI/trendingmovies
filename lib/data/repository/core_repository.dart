@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:trendingmovies/data/model/core.dart';
+import 'package:trendingmovies/data/repository/get_purposeurl.dart';
 import 'package:trendingmovies/env.dart';
 
 class CoreRepository {
@@ -38,4 +39,23 @@ class CoreRepository {
     //return empty list when not working properly
     return [];
   }
+
+  Future<List<Core>> fetchOnDemand() {
+    return searchCore(getPurposeURL("onDemand"));
+  }
+
+  Future<List<Core>> fetchFavorites() {
+    return searchCore(getPurposeURL("favorites"));
+  } 
+  Future<List<Core>> fetchHighVotes() {
+    return searchCore(getPurposeURL("highVotes"));
+  }
+  Future<List<Core>> fetchReleaseSoon() {
+    return searchCore(getPurposeURL("releaseSoon"));
+  }
+  Future<List<Core>> fetchDetails() {
+    return searchCore(getPurposeURL("details"));
+  }
+
 }
+
