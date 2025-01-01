@@ -4,13 +4,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:trendingmovies/data/model/core.dart';
+import 'package:trendingmovies/data/repository/get_details.dart';
 import 'package:trendingmovies/data/repository/get_purposeurl.dart';
 import 'package:trendingmovies/env.dart';
 
 class CoreRepository {
-  String purposeURL; //url for each purpose 
-
-  CoreRepository({required this.purposeURL});
 
   Future<List<Core>> searchCore(String purposeURL) async {
     final client = Client();
@@ -43,7 +41,6 @@ class CoreRepository {
   Future<List<Core>> fetchOnDemand() {
     return searchCore(getPurposeURL("onDemand"));
   }
-
   Future<List<Core>> fetchFavorites() {
     return searchCore(getPurposeURL("favorites"));
   } 
@@ -53,8 +50,8 @@ class CoreRepository {
   Future<List<Core>> fetchReleaseSoon() {
     return searchCore(getPurposeURL("releaseSoon"));
   }
-  Future<List<Core>> fetchDetails() {
-    return searchCore(getPurposeURL("details"));
+  Future<List<Core>> fetchDetails(int id) {
+    return searchCore(getDetails(id));
   }
 
 }

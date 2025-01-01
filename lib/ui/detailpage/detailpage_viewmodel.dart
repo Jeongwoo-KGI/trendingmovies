@@ -12,6 +12,7 @@ class DetailState{
 //VM
 class DetailpageViewmodel extends Notifier<DetailState> {
   @override
+  //initiate empty state
   DetailState build() {
     return DetailState([]); //add the movies part later
   }

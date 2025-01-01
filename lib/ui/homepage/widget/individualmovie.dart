@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:trendingmovies/ui/detailpage/detailpage.dart';
 
 class IndividualMovie extends StatelessWidget{
-  String imageURL;
-  double width;
-  double height;
+  final String imageURL;
+  final double width;
+  final double height;
 
   //constructor
   IndividualMovie({required this.imageURL, this.width= 80, this.height = 180});

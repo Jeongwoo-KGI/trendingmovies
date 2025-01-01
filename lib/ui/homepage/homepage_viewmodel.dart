@@ -7,27 +7,52 @@
 // through this MVVM architecture (first, load the first 5)
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:trendingmovies/data/model/core.dart';
+import 'package:trendingmovies/ui/homepage/model/getmovielist.dart';
 
 class HomeState {
   bool isFetching = false;
   //List<String> list = List.generate(5, (cont){});
+  List<Core> onDemandMovies;
+  List<Core> favoriteMovies;
+  List<Core> highVotesMovies;
+  List<Core> releaseSoonMovies;
 
   //constructor
   HomeState({
     required this.isFetching,
+    required this.onDemandMovies,
+    required this.favoriteMovies,
+    required this.highVotesMovies,
+    required this.releaseSoonMovies,
   });
+
+  //copy
+  HomeState copy({
+    List<Core>? onDemandMovies,
+    List<Core>? favoriteMovies,
+    List<Core>? highVotesMovies,
+    List<Core>? releaseSoonMovies,
+  }) {
+    return HomeState(
+      isFetching: isFetching,
+     onDemandMovies: onDemandMovies ?? this.onDemandMovies, 
+     favoriteMovies: favoriteMovies ?? this.favoriteMovies, 
+     highVotesMovies: highVotesMovies ?? this.highVotesMovies, 
+     releaseSoonMovies: releaseSoonMovies ?? this.releaseSoonMovies,
+     );
+  }
 }
 //VM
-class HomepageViewModel extends Notifier<HomeState>{
+class HomepageViewModel extends Notifier<HomeState?>{
   //Initial State
   @override
-  HomeState build() {
-    return HomeState(
-      isFetching: false,
-    );
+  HomeState? build() {
+    getMyMovies();
+    return null;
   }
 
-  //update state
+  //refresh
  Future<void> onRefresh() async {
     if (state.isFetching) {
       return;
@@ -37,11 +62,26 @@ class HomepageViewModel extends Notifier<HomeState>{
     //refresh
     //add the refresh code here
     state.isFetching = false;
+  }
 
+  //get the list of movies  
+  Future<void> getMyMovies() async {
+    final onDemands = await ref.read(onDemandProvider).execute();
+    final favorites = await ref.read(favoritesProvider).execute();
+    final highVotes = await ref.read(highVotesProvider).execute();
+    final releaseSoons = await ref.read(releaseSoonsrovider).execute();
+
+    state = HomeState(
+      isFetching: false, 
+      onDemandMovies: onDemands,
+      favoriteMovies: favorites, 
+      highVotesMovies: highVotes, 
+      releaseSoonMovies: releaseSoons,
+    );
   }
 }
 
 //VM controller
-final homepageViewModel = NotifierProvider<HomepageViewModel, HomeState>((){
+final homepageViewModel = NotifierProvider<HomepageViewModel, HomeState?>((){
   return HomepageViewModel();
 });

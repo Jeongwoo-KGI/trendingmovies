@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trendingmovies/ui/homepage/homepage_viewmodel.dart';
-import 'package:trendingmovies/ui/homepage/widget/individualmovie.dart';
 import 'package:trendingmovies/ui/homepage/widget/listcomponent.dart';
 
 class Homepage extends StatefulWidget {
@@ -68,11 +67,12 @@ class _HomepageState extends State<Homepage> {
               child: Column(
                 children: [
                   //first, most trending
-                  IndividualMovie(), //url, height, width
-                  ListComponent("현재 상영중"),
-                  ListComponent("인기순", true),
-                  ListComponent("평점높은 순"),
-                  ListComponent("개봉예정"),
+                  //how should I get the single data?
+                  //IndividualMovie(getmovieList("onDemand")[1]), //url, height, width
+                  ListComponent(title: "현재 상영중"),
+                  ListComponent(title: "인기순", numberMeters: true),
+                  ListComponent(title: "평점높은 순"),
+                  ListComponent(title: "개봉예정"),
                 ],
               ),
             ),

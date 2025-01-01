@@ -18,6 +18,7 @@ class Core {
   String title;
   double? voteaverage;
   String releasedate;
+  int id;
 
   Core({
     required this.adult,
@@ -27,6 +28,8 @@ class Core {
     required this.title,
     required this.voteaverage,
     required this.releasedate,
+
+    required this.id,
   });
 
   //from json method constructor
@@ -38,6 +41,7 @@ class Core {
     title: map['original_title'],
     voteaverage: map['vote_average'],
     releasedate: map['release_date'],
+    id: map['id']
   );
 
   //toJson method (we don't need this tho...)
@@ -50,6 +54,7 @@ class Core {
       'original_title':title,
       'vote_average':voteaverage,
       'release_date': releasedate,
+      'id':id,
     };
   }
 
