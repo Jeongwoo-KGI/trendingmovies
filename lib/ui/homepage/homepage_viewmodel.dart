@@ -35,7 +35,7 @@ class HomepageViewModel extends Notifier<HomeState>{
     state.isFetching = true;
     await Future.delayed(Duration(milliseconds: 300));
     //refresh
-    items = List.generate(20, (index) => index);
+    //add the refresh code here
     state.isFetching = false;
 
   }

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:trendingmovies/ui/detailpage/detailpage.dart';
 
 class IndividualMovie extends StatelessWidget{
-  String imageURL = "ch";
-  double width = 80;
-  double height=180;
+  String imageURL;
+  double width;
+  double height;
 
   //constructor
-  IndividualMovie({required this.imageURL, this.width, this.height});
+  IndividualMovie({required this.imageURL, this.width= 80, this.height = 180});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class IndividualMovie extends StatelessWidget{
           child: Container(
             margin: EdgeInsets.all(1.0),
             padding: EdgeInsets.all(1.0),
-            child: Image.network(imageURL),
+            child: Image.network(imageURL)?? Image.asset("assets/images/dummy.png"),
           ),
         ),
       ),

@@ -15,15 +15,18 @@ class DetailpageViewmodel extends Notifier<DetailState> {
   DetailState build() {
     return DetailState([]); //add the movies part later
   }
-
-  void searchMovies(String query) async {
-    final coreRepository = CoreRepository(purposeURL: getPurposeURL("onDemand"));
-    final movies = await coreRepository.searchCore(query);
+  //if I am to allow a search engine to be implemented on the detail page,
+  //use this code for search property
+  //uncomment the detailpage_vm_test.dart for the functionality of this as it requires modification
+  Future<void> searchMovies() async {
+    //example: favorite movie
+    final coreRepository = CoreRepository();
+    final movies = await coreRepository.fetchFavorites();
     state = DetailState(movies);
   }
 }
 
-//auth
-final detialVMProvider = NotifierProvider<DetailpageViewmodel,DetailState>((){
+//VMProvider
+final detailVMProvider = NotifierProvider<DetailpageViewmodel,DetailState>((){
   return DetailpageViewmodel();
 });
