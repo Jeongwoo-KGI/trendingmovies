@@ -50,7 +50,7 @@ class ListComponent extends StatelessWidget{
                 children: [
                   Positioned(
                     //how to add the future class here
-                    child: IndividualMovie(imageURL: ), //add image URL here
+                    child: IndividualMovie(imageURL: "dummy"), //add image URL here
                   ),
                   Positioned(
                     left: 0,
@@ -71,7 +71,7 @@ class ListComponent extends StatelessWidget{
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: IndividualMovie(), // add image url here 
+                child: IndividualMovie(imageURL: "dummy"), // add image url here 
               );
             }
           }, 

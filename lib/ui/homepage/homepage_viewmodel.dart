@@ -7,16 +7,16 @@
 // through this MVVM architecture (first, load the first 5)
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:trendingmovies/data/model/core.dart';
-import 'package:trendingmovies/ui/homepage/model/getmovielist.dart';
+import 'package:trendingmovies/data/dataprovider/dataprovider.dart';
+import 'package:trendingmovies/data/domain/movie.dart';
 
 class HomeState {
   bool isFetching = false;
   //List<String> list = List.generate(5, (cont){});
-  List<Core> onDemandMovies;
-  List<Core> favoriteMovies;
-  List<Core> highVotesMovies;
-  List<Core> releaseSoonMovies;
+  List<Movie> onDemandMovies;
+  List<Movie> favoriteMovies;
+  List<Movie> highVotesMovies;
+  List<Movie> releaseSoonMovies;
 
   //constructor
   HomeState({
@@ -29,10 +29,10 @@ class HomeState {
 
   //copy
   HomeState copy({
-    List<Core>? onDemandMovies,
-    List<Core>? favoriteMovies,
-    List<Core>? highVotesMovies,
-    List<Core>? releaseSoonMovies,
+    List<Movie>? onDemandMovies,
+    List<Movie>? favoriteMovies,
+    List<Movie>? highVotesMovies,
+    List<Movie>? releaseSoonMovies,
   }) {
     return HomeState(
       isFetching: isFetching,
@@ -54,29 +54,29 @@ class HomepageViewModel extends Notifier<HomeState?>{
 
   //refresh
  Future<void> onRefresh() async {
-    if (state.isFetching) {
+    if (state!.isFetching) {
       return;
     }
-    state.isFetching = true;
+    state!.isFetching = true;
     await Future.delayed(Duration(milliseconds: 300));
     //refresh
     //add the refresh code here
-    state.isFetching = false;
+    state!.isFetching = false;
   }
 
   //get the list of movies  
   Future<void> getMyMovies() async {
-    final onDemands = await ref.read(onDemandProvider).execute();
+    final onDemands = await ref.read(onDemandProvider).execute() ?? [];
     final favorites = await ref.read(favoritesProvider).execute();
     final highVotes = await ref.read(highVotesProvider).execute();
-    final releaseSoons = await ref.read(releaseSoonsrovider).execute();
+    final releaseSoons = await ref.read(releaseSoonProvider).execute();
 
     state = HomeState(
       isFetching: false, 
-      onDemandMovies: onDemands,
-      favoriteMovies: favorites, 
-      highVotesMovies: highVotes, 
-      releaseSoonMovies: releaseSoons,
+      onDemandMovies: onDemands!,
+      favoriteMovies: favorites!, 
+      highVotesMovies: highVotes!, 
+      releaseSoonMovies: releaseSoons!,
     );
   }
 }
